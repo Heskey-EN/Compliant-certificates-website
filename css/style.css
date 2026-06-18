@@ -1246,3 +1246,199 @@ section { padding-block: var(--space-section); }
 @media (max-width: 560px) {
   .app-who { display: none; }
 }
+
+/* ============ DASHBOARD ============ */
+.dash-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.75rem;
+}
+.dash-head h1 { margin-bottom: 0.3rem; }
+.dash-head .lede { margin-bottom: 0; }
+
+.dash-grid { display: grid; gap: 1.75rem; }
+@media (min-width: 900px) {
+  .dash-grid { grid-template-columns: 1.4fr 1fr; align-items: start; }
+}
+
+/* Calendar */
+.calendar-wrap {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+  padding: clamp(1rem, 3vw, 1.5rem);
+}
+.calendar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.calendar-head h2 { margin: 0; font-size: 1.15rem; }
+.cal-nav {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.cal-nav:hover { background: var(--green-pale-2); border-color: var(--green); }
+.calendar-dow,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+.calendar-dow {
+  margin-bottom: 4px;
+}
+.calendar-dow span {
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  padding-bottom: 0.25rem;
+}
+.cal-day {
+  aspect-ratio: 1 / 1;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  cursor: pointer;
+  background: var(--paper);
+  overflow: hidden;
+}
+.cal-day:hover { border-color: var(--green); background: var(--green-pale-2); }
+.cal-day.other-month { background: var(--green-pale-2); opacity: 0.5; cursor: default; }
+.cal-day.other-month:hover { border-color: var(--border); }
+.cal-day.today { border-color: var(--green); box-shadow: inset 0 0 0 1px var(--green); }
+.cal-day.selected { background: var(--green-pale); border-color: var(--green-dark); }
+.cal-daynum { font-size: 0.8rem; font-weight: 600; color: var(--ink); }
+.cal-dots { display: flex; flex-wrap: wrap; gap: 3px; margin-top: auto; }
+.cal-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+
+/* Job list */
+.job-panel {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+  padding: clamp(1rem, 3vw, 1.5rem);
+}
+.job-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.job-panel-head h2 { margin: 0; font-size: 1.15rem; }
+.job-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--border);
+}
+.job-row:first-of-type { border-top: 0; }
+.job-when {
+  flex-shrink: 0;
+  text-align: center;
+  min-width: 48px;
+}
+.job-when .d { font-size: 1.3rem; font-weight: 700; line-height: 1; color: var(--ink); font-family: var(--font-display); }
+.job-when .m { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-soft); }
+.job-when .t { font-size: 0.72rem; color: var(--green-dark); font-weight: 600; margin-top: 0.15rem; }
+.job-main { flex: 1; min-width: 0; }
+.job-where { font-weight: 600; color: var(--ink); overflow-wrap: anywhere; }
+.job-meta { font-size: 0.85rem; color: var(--ink-soft); margin-top: 0.15rem; }
+.job-who { font-size: 0.78rem; color: var(--ink-soft); margin-top: 0.2rem; }
+.job-del {
+  flex-shrink: 0;
+  background: none;
+  border: 0;
+  color: var(--ink-soft);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: var(--radius-sm);
+  line-height: 0;
+}
+.job-del:hover { color: #b3261e; background: #fdecea; }
+.job-empty { color: var(--ink-soft); padding: 0.5rem 0; }
+
+/* Service badges / colour coding (warm, on-brand — no blue) */
+.svc {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.12rem 0.5rem;
+  border-radius: 999px;
+  margin-right: 0.4rem;
+}
+.svc-epc  { background: var(--green-pale); color: var(--green-darker); }
+.svc-eicr { background: #fbf0d9; color: #8a5a00; }
+.svc-gas  { background: #f7e6df; color: #8f3c20; }
+.svc-pat  { background: #e7ecea; color: #44544c; }
+.dot-epc  { background: var(--green); }
+.dot-eicr { background: #d99000; }
+.dot-gas  { background: #c2603f; }
+.dot-pat  { background: #5a6b63; }
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(22,35,29,0.45);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(1rem, 5vh, 3rem) 1rem;
+  overflow-y: auto;
+}
+.modal-overlay[hidden] { display: none; }
+.modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  background: var(--paper);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.5rem, 4vw, 2rem);
+  box-shadow: 0 20px 50px rgba(22,35,29,0.25);
+}
+.modal-card h2 { margin-bottom: 1.2rem; }
+.modal-close {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  background: none;
+  border: 0;
+  font-size: 1.2rem;
+  line-height: 1;
+  color: var(--ink-soft);
+  cursor: pointer;
+  padding: 0.3rem;
+}
+.modal-close:hover { color: var(--ink); }
+.modal-card .field { margin-bottom: 1.1rem; }
+.postcode-row { display: flex; gap: 0.5rem; }
+.postcode-row input { flex: 1; }
+.postcode-row .btn { flex-shrink: 0; }
+.postcode-note { font-size: 0.82rem; margin-top: 0.35rem; min-height: 1em; }
+.postcode-note.ok { color: var(--green-dark); }
+.postcode-note.err { color: #b3261e; }

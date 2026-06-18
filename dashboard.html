@@ -40,19 +40,86 @@
   <main>
     <section class="section-tight">
       <div class="container">
-        <h1 style="margin-bottom:0.4rem;">Dashboard</h1>
-        <p class="lede" id="dash-intro">Loading…</p>
+        <div class="dash-head">
+          <div>
+            <h1>Dashboard</h1>
+            <p class="lede" id="dash-intro">Loading…</p>
+          </div>
+          <button type="button" class="btn btn-primary" id="add-job-btn">+ Add job</button>
+        </div>
 
-        <div class="booking-embed" style="margin-top:1.5rem;">
-          <div class="booking-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-            <h3>Calendar &amp; jobs coming next</h3>
-            <p>Login is working. The job calendar and add-job tools are the next step.</p>
+        <div class="dash-grid">
+          <div class="calendar-wrap">
+            <div class="calendar-head">
+              <button type="button" class="cal-nav" id="cal-prev" aria-label="Previous month">&lsaquo;</button>
+              <h2 id="cal-label">…</h2>
+              <button type="button" class="cal-nav" id="cal-next" aria-label="Next month">&rsaquo;</button>
+            </div>
+            <div class="calendar-dow">
+              <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+            </div>
+            <div class="calendar-grid" id="calendar-grid"></div>
+          </div>
+
+          <div class="job-panel">
+            <div class="job-panel-head">
+              <h2 id="job-panel-title">Upcoming jobs</h2>
+              <button type="button" class="btn btn-outline btn-sm" id="clear-day" hidden>Show all</button>
+            </div>
+            <div id="job-list"><p class="job-empty">Loading…</p></div>
           </div>
         </div>
       </div>
     </section>
   </main>
+
+  <!-- ============ ADD JOB MODAL ============ -->
+  <div class="modal-overlay" id="job-modal" hidden>
+    <div class="modal-card">
+      <button type="button" class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+      <h2>Add a job</h2>
+      <form id="job-form" novalidate>
+        <div class="field">
+          <label for="job-postcode">Postcode</label>
+          <div class="postcode-row">
+            <input type="text" id="job-postcode" name="postcode" autocomplete="off" autocapitalize="characters" spellcheck="false" required>
+            <button type="button" class="btn btn-outline btn-sm" id="postcode-find">Find</button>
+          </div>
+          <p class="postcode-note" id="postcode-note"></p>
+        </div>
+        <div class="field">
+          <label for="job-address">Property address</label>
+          <input type="text" id="job-address" name="address" placeholder="House / flat, street">
+        </div>
+        <div class="field">
+          <label for="job-service">Service</label>
+          <select id="job-service" name="service" required>
+            <option value="">Select a service</option>
+            <option value="EPC">EPC</option>
+            <option value="EICR">EICR (Electrical)</option>
+            <option value="Gas Safety">Gas Safety (CP12)</option>
+            <option value="PAT">PAT Testing</option>
+          </select>
+        </div>
+        <div class="form-grid cols-2">
+          <div class="field">
+            <label for="job-date">Date</label>
+            <input type="date" id="job-date" name="job_date" required>
+          </div>
+          <div class="field">
+            <label for="job-time">Time</label>
+            <input type="time" id="job-time" name="job_time">
+          </div>
+        </div>
+        <div class="field">
+          <label for="job-notes">Notes (optional)</label>
+          <textarea id="job-notes" name="notes" placeholder="Access details, contact on site, etc."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="job-save">Save job</button>
+        <p class="form-note" id="job-form-note" role="status"></p>
+      </form>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/supabase-config.js"></script>
