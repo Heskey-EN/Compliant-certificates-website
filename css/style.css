@@ -380,6 +380,7 @@ section { padding-block: var(--space-section); }
   font-weight: 700;
   color: var(--ink);
   font-size: 0.95rem;
+  white-space: nowrap;
 }
 .header-phone svg { width: 18px; height: 18px; color: var(--green); flex-shrink: 0; }
 
@@ -396,7 +397,7 @@ section { padding-block: var(--space-section); }
 .nav-toggle[aria-expanded="true"] .icon-menu { display: none; }
 .nav-toggle[aria-expanded="true"] .icon-close { display: block; }
 
-@media (max-width: 940px) {
+@media (max-width: 1100px) {
   .main-nav {
     position: absolute;
     top: 100%;
@@ -1189,3 +1190,59 @@ section { padding-block: var(--space-section); }
   display: none;
 }
 .form-note.show { display: block; }
+.form-note.error { background: #fdecea; color: #b3261e; }
+
+/* ============ AUTH / DASHBOARD ============ */
+.auth-section { padding-block: clamp(2.5rem, 6vw, 5rem); }
+.auth-card {
+  max-width: 440px;
+  margin: 0 auto;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.75rem, 4vw, 2.5rem);
+  box-shadow: 0 10px 30px rgba(22,35,29,0.05);
+}
+.auth-card h1 { font-size: clamp(1.6rem, 4vw, 2rem); margin-bottom: 0.3rem; }
+.auth-sub { color: var(--ink-soft); margin-bottom: 1.6rem; }
+.auth-card .field { margin-bottom: 1.1rem; }
+.auth-help {
+  margin-top: 1.4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--paper);
+  border-bottom: 1px solid var(--border);
+}
+.app-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.85rem;
+}
+.app-user { display: flex; align-items: center; gap: 1rem; }
+.app-who { font-size: 0.9rem; color: var(--ink-soft); }
+.role-badge {
+  display: inline-block;
+  margin-left: 0.35rem;
+  background: var(--green-pale);
+  color: var(--green-darker);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+}
+@media (max-width: 560px) {
+  .app-who { display: none; }
+}

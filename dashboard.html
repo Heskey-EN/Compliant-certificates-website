@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Compliant Property Certificates</title>
+  <meta name="robots" content="noindex">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M6 40V21L24 7l18 14' stroke='%233FAE76' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M16 17v-7h6v4' stroke='%233FAE76' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M6 40h17' stroke='%233FAE76' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============ APP HEADER ============ -->
+  <header class="app-header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M6 40V21L24 7l18 14" stroke="#3FAE76" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16 17v-7h6v4" stroke="#3FAE76" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M6 40h17" stroke="#3FAE76" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="logo-text">
+          <span class="l1">Compliant Property</span>
+          <span class="l2">Certificates</span>
+        </span>
+      </a>
+      <div class="app-user">
+        <span class="app-who">Signed in as <strong id="who">…</strong> <span class="role-badge" id="role-badge"></span></span>
+        <button type="button" class="btn btn-outline btn-sm" id="logout-btn">Log out</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section-tight">
+      <div class="container">
+        <h1 style="margin-bottom:0.4rem;">Dashboard</h1>
+        <p class="lede" id="dash-intro">Loading…</p>
+
+        <div class="booking-embed" style="margin-top:1.5rem;">
+          <div class="booking-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            <h3>Calendar &amp; jobs coming next</h3>
+            <p>Login is working. The job calendar and add-job tools are the next step.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
