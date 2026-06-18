@@ -12,6 +12,7 @@
   let jobs = [];
   let calYear, calMonth;       // calendar view
   let selectedDate = null;     // YYYY-MM-DD or null
+  let listMode = "upcoming";   // "upcoming" | "all" (when no day selected)
 
   // ---- helpers ----
   function pad(n) { return String(n).padStart(2, "0"); }
@@ -87,21 +88,32 @@
   // ---- job list ----
   function renderList() {
     const todayYMD = formatYMD(new Date());
-    let list, title;
+    const toggle = $("list-toggle");
+    let list, title, emptyMsg;
     if (selectedDate) {
       title = "Jobs · " + prettyFull(selectedDate);
       list = jobs.filter(function (j) { return j.job_date === selectedDate; });
+      emptyMsg = "No jobs on this day.";
       $("clear-day").hidden = false;
+      if (toggle) toggle.hidden = true;
     } else {
-      title = "Upcoming jobs";
-      list = jobs.filter(function (j) { return j.job_date >= todayYMD; });
       $("clear-day").hidden = true;
+      if (toggle) toggle.hidden = false;
+      if (listMode === "all") {
+        title = "All jobs";
+        list = jobs.slice();
+        emptyMsg = "No jobs yet. Click “+ Add job” to create one.";
+      } else {
+        title = "Upcoming jobs";
+        list = jobs.filter(function (j) { return j.job_date >= todayYMD; });
+        emptyMsg = "No upcoming jobs. Click “+ Add job” to create one.";
+      }
     }
     $("job-panel-title").textContent = title;
 
     const listEl = $("job-list");
     if (!list.length) {
-      listEl.innerHTML = '<p class="job-empty">' + (selectedDate ? "No jobs on this day." : "No upcoming jobs yet. Click “+ Add job” to create one.") + "</p>";
+      listEl.innerHTML = '<p class="job-empty">' + emptyMsg + "</p>";
       return;
     }
 
@@ -323,6 +335,15 @@
       calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCalendar();
     });
     $("clear-day").addEventListener("click", function () { selectedDate = null; renderCalendar(); renderList(); });
+    $("list-toggle").querySelectorAll("button").forEach(function (b) {
+      b.addEventListener("click", function () {
+        listMode = b.getAttribute("data-mode");
+        $("list-toggle").querySelectorAll("button").forEach(function (x) { x.classList.toggle("active", x === b); });
+        selectedDate = null;
+        renderCalendar();
+        renderList();
+      });
+    });
     $("add-job-btn").addEventListener("click", function () { openModal(selectedDate); });
     $("modal-close").addEventListener("click", closeModal);
     $("job-modal").addEventListener("click", function (e) { if (e.target === this) closeModal(); });
