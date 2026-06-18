@@ -221,6 +221,20 @@
       note.textContent = "Could not save: " + error.message;
       return;
     }
+
+    // Fire-and-forget email notification (never blocks saving the job).
+    sb.auth.getSession().then(function (s) {
+      fetch("/api/notify-job", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token: s.data.session ? s.data.session.access_token : "",
+          added_by: profile.full_name || profile.username,
+          job: { service: service, job_date: job_date, job_time: form.job_time.value || null, postcode: postcode, address: form.address.value.trim() || null, notes: form.notes.value.trim() || null },
+        }),
+      }).catch(function () {});
+    });
+
     closeModal();
     await loadJobs();
     const d = parseYMD(job_date);
