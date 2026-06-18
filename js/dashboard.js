@@ -217,6 +217,79 @@
     renderList();
   }
 
+  // ---- members (admin only) ----
+  async function loadMembers() {
+    const { data } = await sb
+      .from("profiles")
+      .select("id, username, full_name, role")
+      .order("role", { ascending: true })
+      .order("username", { ascending: true });
+    const listEl = $("members-list");
+    const rows = data || [];
+    if (!rows.length) { listEl.innerHTML = '<p class="job-empty">No members yet.</p>'; return; }
+    let html = "";
+    rows.forEach(function (p) {
+      html += '<div class="member-row">'
+        + '<div class="member-main"><div class="member-name">' + esc(p.full_name || p.username) + "</div>"
+        + '<div class="member-user">' + esc(p.username) + "</div></div>"
+        + '<span class="role-badge">' + (p.role === "admin" ? "Admin" : "Member") + "</span>"
+        + "</div>";
+    });
+    listEl.innerHTML = html;
+  }
+
+  function openMemberModal() {
+    const form = $("member-form");
+    form.reset();
+    $("member-form-note").className = "form-note";
+    $("member-form-note").textContent = "";
+    $("member-modal").hidden = false;
+    $("m-username").focus();
+  }
+  function closeMemberModal() { $("member-modal").hidden = true; }
+
+  async function submitMember(e) {
+    e.preventDefault();
+    const form = $("member-form");
+    const note = $("member-form-note");
+    const save = $("member-save");
+    const username = form.username.value.trim();
+    const password = form.password.value;
+    if (!username || !password) {
+      note.className = "form-note show error";
+      note.textContent = "Username and password are required.";
+      return;
+    }
+    save.disabled = true;
+    note.className = "form-note show"; note.textContent = "Creating…";
+
+    const { data: { session } } = await sb.auth.getSession();
+    let result;
+    try {
+      const res = await fetch("/api/create-member", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token: session ? session.access_token : "",
+          username: username,
+          full_name: form.full_name.value.trim(),
+          password: password,
+        }),
+      });
+      result = await res.json();
+      if (!res.ok) throw new Error(result.error || "Could not create member.");
+    } catch (err) {
+      save.disabled = false;
+      note.className = "form-note show error";
+      note.textContent = err.message || "Could not create member.";
+      return;
+    }
+
+    save.disabled = false;
+    closeMemberModal();
+    await loadMembers();
+  }
+
   // ---- init ----
   document.addEventListener("DOMContentLoaded", async function () {
     profile = await requireSession();
@@ -256,5 +329,17 @@
     document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !$("job-modal").hidden) closeModal(); });
     $("postcode-find").addEventListener("click", findPostcode);
     $("job-form").addEventListener("submit", submitJob);
+
+    // Admin-only: member management
+    if (isAdmin) {
+      $("add-member-btn").hidden = false;
+      $("members-panel").hidden = false;
+      await loadMembers();
+      $("add-member-btn").addEventListener("click", openMemberModal);
+      $("member-close").addEventListener("click", closeMemberModal);
+      $("member-modal").addEventListener("click", function (e) { if (e.target === this) closeMemberModal(); });
+      $("member-form").addEventListener("submit", submitMember);
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !$("member-modal").hidden) closeMemberModal(); });
+    }
   });
 })();

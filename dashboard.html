@@ -45,7 +45,10 @@
             <h1>Dashboard</h1>
             <p class="lede" id="dash-intro">Loading…</p>
           </div>
-          <button type="button" class="btn btn-primary" id="add-job-btn">+ Add job</button>
+          <div class="dash-actions">
+            <button type="button" class="btn btn-outline" id="add-member-btn" hidden>+ Add member</button>
+            <button type="button" class="btn btn-primary" id="add-job-btn">+ Add job</button>
+          </div>
         </div>
 
         <div class="dash-grid">
@@ -68,6 +71,13 @@
             </div>
             <div id="job-list"><p class="job-empty">Loading…</p></div>
           </div>
+        </div>
+
+        <div class="job-panel" id="members-panel" hidden style="margin-top:1.75rem;">
+          <div class="job-panel-head">
+            <h2>Team members</h2>
+          </div>
+          <div id="members-list"><p class="job-empty">Loading…</p></div>
         </div>
       </div>
     </section>
@@ -117,6 +127,31 @@
         </div>
         <button type="submit" class="btn btn-primary btn-block" id="job-save">Save job</button>
         <p class="form-note" id="job-form-note" role="status"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============ ADD MEMBER MODAL (admins only) ============ -->
+  <div class="modal-overlay" id="member-modal" hidden>
+    <div class="modal-card">
+      <button type="button" class="modal-close" id="member-close" aria-label="Close">&times;</button>
+      <h2>Add a member</h2>
+      <p class="auth-sub">Create a login for a team member. They'll only see the jobs they add.</p>
+      <form id="member-form" novalidate>
+        <div class="field">
+          <label for="m-username">Username</label>
+          <input type="text" id="m-username" name="username" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="e.g. john-smith" required>
+        </div>
+        <div class="field">
+          <label for="m-fullname">Full name</label>
+          <input type="text" id="m-fullname" name="full_name" autocomplete="off" placeholder="e.g. John Smith">
+        </div>
+        <div class="field">
+          <label for="m-password">Initial password</label>
+          <input type="text" id="m-password" name="password" autocomplete="off" placeholder="At least 6 characters" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="member-save">Create member</button>
+        <p class="form-note" id="member-form-note" role="status"></p>
       </form>
     </div>
   </div>
