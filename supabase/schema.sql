@@ -95,7 +95,8 @@ create policy jobs_insert on public.jobs
 -- Jobs: a user can edit/delete their own; admins can edit/delete any.
 drop policy if exists jobs_update on public.jobs;
 create policy jobs_update on public.jobs
-  for update using ( created_by = auth.uid() or public.is_admin() );
+  for update using ( created_by = auth.uid() or public.is_admin() )
+  with check ( created_by = auth.uid() or public.is_admin() );
 
 drop policy if exists jobs_delete on public.jobs;
 create policy jobs_delete on public.jobs
