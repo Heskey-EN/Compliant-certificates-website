@@ -18,7 +18,13 @@ module.exports = async function handler(req, res) {
 
   // Not configured yet — succeed quietly so adding a job is never blocked.
   if (!RESEND_API_KEY || !NOTIFY_EMAIL) {
-    return res.status(200).json({ ok: false, skipped: true, reason: "Email notifications not configured." });
+    return res.status(200).json({
+      ok: false,
+      skipped: true,
+      reason: "Email notifications not configured.",
+      hasKey: !!RESEND_API_KEY,
+      hasEmail: !!NOTIFY_EMAIL,
+    });
   }
 
   let body = req.body;
