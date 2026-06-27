@@ -15,6 +15,15 @@ document.addEventListener("DOMContentLoaded", function () {
   var PRICES = { "0-1": 54, "2-3": 59, "4-5": 64 }; // £, display only — server re-checks
   var current = null; // { postcode, bedrooms }
 
+  // Don't allow choosing a date in the past.
+  var dateInput = document.getElementById("b-date");
+  if (dateInput) {
+    var t = new Date();
+    dateInput.min = t.getFullYear() + "-" +
+      String(t.getMonth() + 1).padStart(2, "0") + "-" +
+      String(t.getDate()).padStart(2, "0");
+  }
+
   function isSM4(pc) { return /^SM4\d/.test(String(pc).replace(/\s+/g, "").toUpperCase()); }
 
   function setMsg(el, text, kind) {

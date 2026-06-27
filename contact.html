@@ -64,7 +64,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
             0203 488 0550
           </a>
-          <a href="contact.html" class="btn btn-primary btn-sm">Get a Quote</a>
+          <a href="contact.html#book" class="btn btn-primary btn-sm">Book now</a>
           <a href="login.html" class="btn btn-outline btn-sm">Member Log in</a>
         </div>
       </nav>
@@ -90,6 +90,82 @@
         <p class="lede" style="max-width: 620px;">Request a fixed-price quote, ask a question, or book your certificate — we usually reply within one working day.</p>
       </div>
     </div>
+
+    <!-- ============ BOOK ONLINE ============ -->
+    <section id="book" class="section-tight">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Book your EPC online</h2>
+          <p class="lede">Enter your postcode and property size to see your price, then book and pay securely. Available for SM4 postcodes — elsewhere, just <a href="#enquiry">send an enquiry</a> or call us and we'll book you in.</p>
+        </div>
+
+        <div class="booking-card reveal">
+          <!-- Step 1: postcode + bedrooms -->
+          <form id="booking-check" novalidate>
+            <div class="form-grid cols-2">
+              <div class="field">
+                <label for="b-postcode">Property postcode</label>
+                <input type="text" id="b-postcode" name="postcode" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="e.g. SM4 5AB" required>
+              </div>
+              <div class="field">
+                <label for="b-bedrooms">Bedrooms</label>
+                <select id="b-bedrooms" name="bedrooms" required>
+                  <option value="">Select…</option>
+                  <option value="0-1">0–1 bedrooms</option>
+                  <option value="2-3">2–3 bedrooms</option>
+                  <option value="4-5">4–5 bedrooms</option>
+                  <option value="6+">6+ bedrooms</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Check price</button>
+          </form>
+
+          <p class="booking-msg" id="booking-msg" role="status"></p>
+
+          <!-- Step 2: details + pay (revealed when eligible) -->
+          <form id="booking-details" hidden>
+            <div class="booking-price" id="booking-price"></div>
+            <div class="form-grid cols-2">
+              <div class="field">
+                <label for="b-name">Full name</label>
+                <input type="text" id="b-name" name="name" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="b-email">Email address</label>
+                <input type="email" id="b-email" name="email" autocomplete="email" required>
+              </div>
+              <div class="field">
+                <label for="b-phone">Phone number</label>
+                <input type="tel" id="b-phone" name="phone" autocomplete="tel">
+              </div>
+              <div class="field">
+                <label for="b-address">Property address</label>
+                <input type="text" id="b-address" name="address" placeholder="House / flat, street">
+              </div>
+              <div class="field">
+                <label for="b-date">Preferred date</label>
+                <input type="date" id="b-date" name="job_date" required>
+              </div>
+              <div class="field">
+                <label for="b-time">Preferred time</label>
+                <input type="time" id="b-time" name="job_time">
+              </div>
+              <div class="field span-2">
+                <label for="b-notes">Anything else we should know?</label>
+                <textarea id="b-notes" name="notes" placeholder="Access details, parking, etc."></textarea>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" id="b-pay">Book &amp; pay</button>
+            <p class="booking-msg" id="booking-pay-msg" role="status"></p>
+            <p class="booking-secure">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Payments are processed securely by Stripe. We never see your card details.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
 
     <!-- ============ CONTACT GRID ============ -->
     <section>
@@ -190,82 +266,6 @@
             </form>
           </div>
 
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ BOOK ONLINE ============ -->
-    <section id="book" class="section-tight">
-      <div class="container">
-        <div class="section-head reveal">
-          <h2>Book your EPC online</h2>
-          <p class="lede">Enter your postcode and property size to see your price, then book and pay securely. Available for SM4 postcodes — elsewhere, just <a href="#enquiry">send an enquiry</a> or call us and we'll book you in.</p>
-        </div>
-
-        <div class="booking-card reveal">
-          <!-- Step 1: postcode + bedrooms -->
-          <form id="booking-check" novalidate>
-            <div class="form-grid cols-2">
-              <div class="field">
-                <label for="b-postcode">Property postcode</label>
-                <input type="text" id="b-postcode" name="postcode" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="e.g. SM4 5AB" required>
-              </div>
-              <div class="field">
-                <label for="b-bedrooms">Bedrooms</label>
-                <select id="b-bedrooms" name="bedrooms" required>
-                  <option value="">Select…</option>
-                  <option value="0-1">0–1 bedrooms</option>
-                  <option value="2-3">2–3 bedrooms</option>
-                  <option value="4-5">4–5 bedrooms</option>
-                  <option value="6+">6+ bedrooms</option>
-                </select>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Check price</button>
-          </form>
-
-          <p class="booking-msg" id="booking-msg" role="status"></p>
-
-          <!-- Step 2: details + pay (revealed when eligible) -->
-          <form id="booking-details" hidden>
-            <div class="booking-price" id="booking-price"></div>
-            <div class="form-grid cols-2">
-              <div class="field">
-                <label for="b-name">Full name</label>
-                <input type="text" id="b-name" name="name" autocomplete="name" required>
-              </div>
-              <div class="field">
-                <label for="b-email">Email address</label>
-                <input type="email" id="b-email" name="email" autocomplete="email" required>
-              </div>
-              <div class="field">
-                <label for="b-phone">Phone number</label>
-                <input type="tel" id="b-phone" name="phone" autocomplete="tel">
-              </div>
-              <div class="field">
-                <label for="b-address">Property address</label>
-                <input type="text" id="b-address" name="address" placeholder="House / flat, street">
-              </div>
-              <div class="field">
-                <label for="b-date">Preferred date</label>
-                <input type="date" id="b-date" name="job_date" required>
-              </div>
-              <div class="field">
-                <label for="b-time">Preferred time</label>
-                <input type="time" id="b-time" name="job_time">
-              </div>
-              <div class="field span-2">
-                <label for="b-notes">Anything else we should know?</label>
-                <textarea id="b-notes" name="notes" placeholder="Access details, parking, etc."></textarea>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block" id="b-pay">Book &amp; pay</button>
-            <p class="booking-msg" id="booking-pay-msg" role="status"></p>
-            <p class="booking-secure">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              Payments are processed securely by Stripe. We never see your card details.
-            </p>
-          </form>
         </div>
       </div>
     </section>

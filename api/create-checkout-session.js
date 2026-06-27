@@ -38,6 +38,9 @@ module.exports = async function handler(req, res) {
   if (!email || !jobDate) {
     return res.status(400).json({ error: "Please provide an email address and preferred date." });
   }
+  if (jobDate < new Date().toISOString().slice(0, 10)) {
+    return res.status(400).json({ error: "Please choose a date in the future." });
+  }
 
   const origin = req.headers.origin || ("https://" + req.headers.host);
   const params = new URLSearchParams();
