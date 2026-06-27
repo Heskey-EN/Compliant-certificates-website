@@ -1473,6 +1473,56 @@ section { padding-block: var(--space-section); }
 .postcode-note.ok { color: var(--green-dark); }
 .postcode-note.err { color: #b3261e; }
 
+/* ============ ONLINE BOOKING WIDGET ============ */
+.booking-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  box-shadow: 0 10px 30px rgba(22,35,29,0.05);
+}
+#booking-check .btn { margin-top: 0.25rem; }
+.booking-msg { display: none; font-size: 0.92rem; margin-top: 1rem; padding: 0.85rem 1.1rem; border-radius: var(--radius-sm); }
+.booking-msg.show { display: block; }
+.booking-msg.err { background: #fdecea; color: #b3261e; }
+.booking-price {
+  background: var(--green-pale);
+  color: var(--green-darker);
+  border-radius: var(--radius-sm);
+  padding: 0.9rem 1.1rem;
+  font-size: 1.05rem;
+  margin: 1.5rem 0;
+}
+.booking-price strong { font-size: 1.25rem; }
+#booking-details { margin-top: 0.5rem; border-top: 1px solid var(--border); padding-top: 1.5rem; }
+.booking-secure {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  margin-top: 1rem;
+}
+.booking-secure svg { color: var(--green); flex-shrink: 0; }
+
+/* Booking confirmation (success page) */
+.success-tick {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--green-pale);
+  color: var(--green-dark);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.2rem;
+}
+.success-tick svg { width: 30px; height: 30px; }
+.booking-summary { list-style: none; margin: 1.5rem 0; padding: 0; border-top: 1px solid var(--border); }
+.booking-summary li {
+  display: flex; justify-content: space-between; gap: 1rem;
+  padding: 0.7rem 0; border-bottom: 1px solid var(--border);
+}
+.booking-summary span { color: var(--ink-soft); }
+.booking-summary strong { color: var(--ink); text-align: right; }
+
 /* ============ LEGAL PAGES ============ */
 .legal { padding-block: clamp(2.5rem, 5vw, 4rem); }
 .legal .updated { color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 2rem; }

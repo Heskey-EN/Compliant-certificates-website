@@ -121,7 +121,16 @@
     list.forEach(function (j) {
       const d = parseYMD(j.job_date);
       const t = hhmm(j.job_time);
-      const who = isAdmin ? '<div class="job-who">Added by ' + esc(profilesMap[j.created_by] || "—") + "</div>" : "";
+      let who = "";
+      if (j.source === "online") {
+        who = '<div class="job-who">Online booking'
+          + (j.customer_name ? " &middot; " + esc(j.customer_name) : "")
+          + (j.customer_phone ? " &middot; " + esc(j.customer_phone) : "")
+          + (j.payment_status === "paid" ? ' <span class="svc svc-epc">Paid</span>' : "")
+          + "</div>";
+      } else if (isAdmin) {
+        who = '<div class="job-who">Added by ' + esc(profilesMap[j.created_by] || "—") + "</div>";
+      }
       html += '<div class="job-row">'
         + '<div class="job-when"><span class="d">' + d.getDate() + '</span><span class="m">' + MON[d.getMonth()] + "</span>"
         + (t ? '<span class="t">' + t + "</span>" : "") + "</div>"

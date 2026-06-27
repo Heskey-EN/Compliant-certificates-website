@@ -32,6 +32,22 @@ create table if not exists public.jobs (
 create index if not exists jobs_created_by_idx on public.jobs (created_by);
 create index if not exists jobs_date_idx on public.jobs (job_date);
 
+-- ---------- Online bookings migration (safe to re-run) ----------
+-- Customer bookings paid online have no logged-in user, so created_by is
+-- nullable and we record the customer + payment details on the job.
+alter table public.jobs alter column created_by drop not null;
+alter table public.jobs add column if not exists source text not null default 'staff';
+alter table public.jobs add column if not exists customer_name text;
+alter table public.jobs add column if not exists customer_email text;
+alter table public.jobs add column if not exists customer_phone text;
+alter table public.jobs add column if not exists bedrooms text;
+alter table public.jobs add column if not exists payment_status text;
+alter table public.jobs add column if not exists amount_paid integer;       -- pence
+alter table public.jobs add column if not exists stripe_session_id text;
+-- Prevent the same paid checkout creating duplicate jobs.
+create unique index if not exists jobs_stripe_session_idx
+  on public.jobs (stripe_session_id) where stripe_session_id is not null;
+
 -- ---------- Helper: is the current user an admin? ----------
 -- SECURITY DEFINER so it bypasses RLS and can't cause policy recursion.
 create or replace function public.is_admin()
