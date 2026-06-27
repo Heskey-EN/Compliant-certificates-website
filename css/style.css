@@ -269,6 +269,18 @@ section { padding-block: var(--space-section); }
 .btn-block { width: 100%; }
 .btn-sm { padding: 0.6em 1.3em; font-size: 0.85rem; }
 
+/* Header "Book now" is a white button (navy text + border) */
+.header-cta .btn-primary {
+  background: #fff;
+  color: var(--navy);
+  border-color: var(--navy);
+}
+.header-cta .btn-primary:hover {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+}
+
 /* ============ TOP BAR ============ */
 .topbar {
   background: var(--ink);
